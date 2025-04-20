@@ -1,0 +1,49 @@
+# Airbnb Search Bot - Instructions
+
+SETUP INSTRUCTIONS:
+1. Install the required package:
+   pip install "praisonaiagents[llm]"
+
+2. Make sure Ollama is installed on your system
+   - Download from: https://ollama.ai/
+   - Install and run the application
+
+3. Pull the required LLM model:
+   ollama pull llama3.2
+
+4. Create a file named airbnb_search.py with this code:
+   ```
+   from praisonaiagents import Agent, MCP
+
+   search_agent = Agent(
+       instructions="""You help book apartments on Airbnb.""",
+       llm="ollama/llama3.2",
+       tools=MCP("npx -y @openbnb/mcp-server-airbnb --ignore-robots-txt")
+   )
+
+   search_agent.start("MUST USE airbnb_search Tool to Search. Search for Apartments in Paris for 2 nights. 04/28 - 04/30 for 2 adults. All Your Preference")
+   ```
+
+5. Run the script:
+   python airbnb_search.py
+
+CUSTOMIZATION:
+- To search for different locations, dates, or guest numbers, modify the text in search_agent.start()
+- Example modifications:
+  - Change "Paris" to another city
+  - Adjust dates from "04/28 - 04/30" to your preferred dates
+  - Change "2 adults" to different number of guests
+
+TROUBLESHOOTING:
+- Ensure Ollama is running before executing the script
+- Check that Node.js is installed (required for npx commands)
+- Verify your internet connection
+
+REQUIREMENTS:
+- Python 3.7+
+- Node.js 
+- Internet connection
+- Ollama application
+
+WHAT THIS DOES:
+This script creates an AI agent that uses Ollama's llama3.2 model to process natural language instructions for searching Airbnb listings. It connects to Airbnb's services through the MCP server to perform searches based on your specifications.
